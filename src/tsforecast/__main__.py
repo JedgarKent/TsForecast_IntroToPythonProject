@@ -18,8 +18,7 @@ def main():
 
     # 1. load data
 
-    ts = TimeSeries()
-    ts.load_csv(args.file, args.date_col, args.value_col)
+    ts = TimeSeries.csv(args.file, args.date_col, args.value_col)
     train, test = ts.train_test_split(test_size=0.2)
 
     # 2. compare_models
