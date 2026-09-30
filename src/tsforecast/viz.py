@@ -24,3 +24,19 @@ def plot_forecast(train_series, test_series, predictions, model_name, save_path)
     fig.savefig(save_path)
     plt.close(fig)
 
+def plot_model_comparison(results_df, save_path):
+    
+    """Plotting BarChart of RMSE for each model
+
+    results_df - pandas DataFrame with columns: model, mae, rmse"""
+
+    fig, ax = plt.subplots(figsize=(8, 5))
+
+    ax.bar(results_df["model"], results_df["rmse"])
+
+    ax.set_title("Model Comparison — RMSE")
+    ax.set_xlabel("Model")
+    ax.set_ylabel("RMSE")
+
+    fig.savefig(save_path)
+    plt.close(fig)
