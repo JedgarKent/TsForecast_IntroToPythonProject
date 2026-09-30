@@ -23,7 +23,7 @@ def main():
 
     # 2. compare_models
 
-    models = [NaiveForecaster(), MovingAverageForecaster(window=3)]
+    models = [NaiveForecaster(), MovingAverageForecaster(window_size=3)]
     results = compare_models(models, train.series, test.series)
 
 
