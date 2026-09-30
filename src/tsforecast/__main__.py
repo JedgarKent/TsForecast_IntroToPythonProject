@@ -17,10 +17,32 @@ def main():
     args = parser.parse_args()
 
     # 1. load data
-    # 2. train_test_split
-    # 3. compare_models
-    # 4. print results
-    # 5. plot_forecast, save to outputs/
+
+    ts = TimeSeries()
+    ts.load_csv(args.file, args.date_col, args.value_col)
+    train, test = ts.train_test_split(test_size=0.2)
+
+    # 2. compare_models
+
+    models = [NaiveForecaster(), MovingAverageForecaster(window=3)]
+    results = compare_models(models, train.series, test.series)
+
+
+    # 3. print results
+    
+    print(results)
+    
+    # 4. plot_forecast, save to outputs/
+
+    horizon = len(test.series)
+    for model in models:
+        model.fit(train.series)
+        predictions = model.predict(horizon)
+        model_name = type(model).__name__
+        save_path = f"output/{model_name}.png"
+        plot_forecast(train.series, test.series, predictions, model_name, save_path)
+        print(f"Saved plot to {save_path}")
+
     pass
 
 if __name__ == "__main__":
