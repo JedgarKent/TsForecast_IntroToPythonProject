@@ -22,3 +22,6 @@ class MovingAverageForecaster:
         last_values = train_series.tail(self.window_size)
         self.average = last_values.mean()
         return self
+
+    def predict(self, periods):
+        return [self.average] * periods
